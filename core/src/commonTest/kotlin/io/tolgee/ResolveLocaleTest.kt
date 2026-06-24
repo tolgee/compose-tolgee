@@ -103,9 +103,23 @@ class ResolveLocaleTest {
     }
 
     @Test
-    fun fallbackFromLanguageScriptRegionToScript() {
+    fun fallbackFromLanguageScriptRegionToScriptWhenAvailable() {
         val tolgee = createTolgee(listOf(forLocaleTag("en"), forLocaleTag("en-Latn")))
         val result = tolgee.testResolveLocale(forLocaleTag("en-Latn-US"))
         assertEquals("en-Latn", result?.toTag("-"))
+    }
+
+    @Test
+    fun fallbackFromLanguageScriptRegionToRegionWhenScriptUnavailable() {
+        val tolgee = createTolgee(listOf(forLocaleTag("en"), forLocaleTag("en-US")))
+        val result = tolgee.testResolveLocale(forLocaleTag("en-Latn-US"))
+        assertEquals("en-US", result?.toTag("-"))
+    }
+
+    @Test
+    fun fallbackFromLanguageScriptRegionToRegionWhenOnlyRegionalAvailable() {
+        val tolgee = createTolgee(listOf(forLocaleTag("zh-CN")))
+        val result = tolgee.testResolveLocale(forLocaleTag("zh-Hans-CN"))
+        assertEquals("zh-CN", result?.toTag("-"))
     }
 }

@@ -167,8 +167,12 @@ open class Tolgee(
      * Generates progressive fallback variations for a locale by removing components
      * from right to left following BCP 47 structure (language-script-region-variant).
      *
+     * When both script and region are present, also tries language-region (dropping script)
+     * after language-script. This matches common CDN layouts (e.g. en-Latn-US → en-US).
+     *
      * Examples:
-     * - "zh-Hans-CN" → ["zh-Hans-CN", "zh-Hans", "zh"]
+     * - "zh-Hans-CN" → ["zh-Hans-CN", "zh-Hans", "zh-CN", "zh"]
+     * - "en-Latn-US" → ["en-Latn-US", "en-Latn", "en-US", "en"]
      * - "en-US" → ["en-US", "en"]
      * - "sr-Cyrl" → ["sr-Cyrl", "sr"]
      * - "en" → ["en"]
@@ -198,16 +202,35 @@ open class Tolgee(
         val language = coreLocale.language
         if (language.isBlank()) return fallbacks
 
+        val script = coreLocale.script.takeIf { it.isNotBlank() }
+        val region = coreLocale.country.takeIf { it.isNotBlank() }
+        val variant = coreLocale.variant.takeIf { it.isNotBlank() }
+
         val subtags = buildList {
             add(language)
-            coreLocale.script.takeIf { it.isNotBlank() }?.let(::add)
-            coreLocale.country.takeIf { it.isNotBlank() }?.let(::add)
-            coreLocale.variant.takeIf { it.isNotBlank() }?.let(::add)
+            script?.let(::add)
+            region?.let(::add)
+            variant?.let(::add)
         }
 
-        for (count in subtags.size - 1 downTo 1) {
-            addCandidate(forLocaleTag(subtags.take(count).joinToString("-")))
+        val coreFallbackTags = buildList {
+            for (count in subtags.size - 1 downTo 1) {
+                add(subtags.take(count).joinToString("-"))
+            }
+        }.toMutableList()
+
+        // When both script and region are present, also try language-region (e.g. en-Latn-US → en-US).
+        // Insert after language-script so script-specific matches (zh-Hans) stay preferred over regional ones (zh-CN).
+        if (script != null && region != null) {
+            val langScriptTag = "$language-$script"
+            val langRegionTag = "$language-$region"
+            val scriptIndex = coreFallbackTags.indexOf(langScriptTag)
+            if (scriptIndex >= 0 && langRegionTag !in coreFallbackTags) {
+                coreFallbackTags.add(scriptIndex + 1, langRegionTag)
+            }
         }
+
+        coreFallbackTags.forEach { addCandidate(forLocaleTag(it)) }
 
         return fallbacks
     }
@@ -227,8 +250,8 @@ open class Tolgee(
      * a match is found.
      *
      * Examples:
-     * - "zh-Hans-CN" → "zh-Hans-CN" → "zh-Hans" → "zh" → default
-     * - "en-Latn-US" → "en-Latn-US" → "en-Latn" → "en" → default
+     * - "zh-Hans-CN" → "zh-Hans-CN" → "zh-Hans" → "zh-CN" → "zh" → default
+     * - "en-Latn-US" → "en-Latn-US" → "en-Latn" → "en-US" → "en" → default
      * - "sr-Cyrl" → "sr-Cyrl" → "sr" → default
      * - "en-US" → "en-US" → "en" → default
      *
