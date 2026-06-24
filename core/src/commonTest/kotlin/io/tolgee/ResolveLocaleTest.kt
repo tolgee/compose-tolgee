@@ -87,4 +87,25 @@ class ResolveLocaleTest {
         val result = tolgee.testResolveLocale(locale)
         assertEquals("zh-Hans", result?.toTag("-"))
     }
+
+    @Test
+    fun unicodeExtensionFallsBackToBaseLanguage() {
+        val tolgee = createTolgee(listOf(forLocaleTag("en"), forLocaleTag("es")))
+        val result = tolgee.testResolveLocale(forLocaleTag("es-u-ms-metric"))
+        assertEquals("es", result?.toTag("-"))
+    }
+
+    @Test
+    fun unicodeExtensionExactMatchWhenAvailable() {
+        val tolgee = createTolgee(listOf(forLocaleTag("en"), forLocaleTag("es-u-ms-metric")))
+        val result = tolgee.testResolveLocale(forLocaleTag("es-u-ms-metric"))
+        assertEquals("es-u-ms-metric", result?.toTag("-"))
+    }
+
+    @Test
+    fun fallbackFromLanguageScriptRegionToScript() {
+        val tolgee = createTolgee(listOf(forLocaleTag("en"), forLocaleTag("en-Latn")))
+        val result = tolgee.testResolveLocale(forLocaleTag("en-Latn-US"))
+        assertEquals("en-Latn", result?.toTag("-"))
+    }
 }

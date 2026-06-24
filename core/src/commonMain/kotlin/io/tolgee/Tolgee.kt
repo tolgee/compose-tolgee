@@ -1,9 +1,13 @@
 package io.tolgee
 
 import de.comahe.i18n4k.Locale
+import de.comahe.i18n4k.country
 import de.comahe.i18n4k.forLocaleTag
 import de.comahe.i18n4k.language
+import de.comahe.i18n4k.removeExtensions
+import de.comahe.i18n4k.script
 import de.comahe.i18n4k.toTag
+import de.comahe.i18n4k.variant
 import dev.datlag.tooling.async.suspendCatching
 import io.ktor.client.*
 import io.ktor.client.engine.*
@@ -173,23 +177,36 @@ open class Tolgee(
      * @return List of locales in fallback order (most specific to least specific)
      */
     private fun generateLocaleFallbacks(locale: Locale): List<Locale> {
-        val localeTag = locale.toTag("-")
-        val components = localeTag.split("-")
-
         val fallbacks = mutableListOf<Locale>()
+        val seenTags = mutableSetOf<String>()
 
-        // Start with the full locale
-        fallbacks.add(locale)
-
-        // Generate intermediate variations by removing components from right to left
-        for (i in components.size - 1 downTo 2) {
-            val fallbackTag = components.subList(0, i).joinToString("-")
-            fallbacks.add(forLocaleTag(fallbackTag))
+        fun addCandidate(candidate: Locale) {
+            val tagKey = candidate.toTag("-").lowercase()
+            if (seenTags.add(tagKey)) {
+                fallbacks.add(candidate)
+            }
         }
 
-        // Add base language if not already included (when components.size > 1)
-        if (components.size > 1) {
-            fallbacks.add(forLocaleTag(components[0]))
+        addCandidate(locale)
+
+        // Extensions (u, t, x) are atomic in BCP 47 and must not be truncated piecemeal.
+        val coreLocale = locale.removeExtensions()
+        if (coreLocale != locale) {
+            addCandidate(coreLocale)
+        }
+
+        val language = coreLocale.language
+        if (language.isBlank()) return fallbacks
+
+        val subtags = buildList {
+            add(language)
+            coreLocale.script.takeIf { it.isNotBlank() }?.let(::add)
+            coreLocale.country.takeIf { it.isNotBlank() }?.let(::add)
+            coreLocale.variant.takeIf { it.isNotBlank() }?.let(::add)
+        }
+
+        for (count in subtags.size - 1 downTo 1) {
+            addCandidate(forLocaleTag(subtags.take(count).joinToString("-")))
         }
 
         return fallbacks
