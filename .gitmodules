@@ -1,0 +1,8 @@
+[submodule "examples/kitshn"]
+	path = examples/kitshn
+	url = https://github.com/NikolaRusakov/kitshn.git
+	branch = feature/tolgee-integration
+[submodule "examples/binaryeye"]
+	path = examples/binaryeye
+	url = https://github.com/NikolaRusakov/BinaryEye.git
+	branch = feature/tolgee-integration
