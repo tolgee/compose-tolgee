@@ -273,7 +273,7 @@ open class Tolgee(
         if (config.availableLocales != null) return
 
         // Skip if already loaded
-        if (cachedManifest.value != null) return
+        if (cachedManifest.value?.locales != null) return
 
         withContext(config.network.context) {
             // Try to fetch fresh manifest from CDN
@@ -888,7 +888,7 @@ open class Tolgee(
             val path: (language: String) -> String = { "$it.json" },
             val storage: TolgeeStorageProvider? = platformStorage,
             val formatter: Formatter = Formatter.Sprintf,
-            val manifestPath: String = path("manifest"),
+            val manifestPath: String = "manifest.json",
             val maxLocalesInMemory: Int? = 1,
         ) {
             /**
@@ -1069,7 +1069,7 @@ open class Tolgee(
                 fun build(): ContentDelivery = ContentDelivery(
                     url = url?.ifBlank { null },
                     path = path,
-                    manifestPath = manifestPath ?: path("manifest"),
+                    manifestPath = manifestPath ?: "manifest.json",
                     storage = storage,
                     formatter = formatter,
                     maxLocalesInMemory = maxLocalesInMemory
