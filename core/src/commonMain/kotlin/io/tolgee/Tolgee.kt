@@ -1,9 +1,13 @@
 package io.tolgee
 
 import de.comahe.i18n4k.Locale
+import de.comahe.i18n4k.country
 import de.comahe.i18n4k.forLocaleTag
 import de.comahe.i18n4k.language
+import de.comahe.i18n4k.removeExtensions
+import de.comahe.i18n4k.script
 import de.comahe.i18n4k.toTag
+import de.comahe.i18n4k.variant
 import dev.datlag.tooling.async.suspendCatching
 import io.ktor.client.*
 import io.ktor.client.engine.*
@@ -163,8 +167,12 @@ open class Tolgee(
      * Generates progressive fallback variations for a locale by removing components
      * from right to left following BCP 47 structure (language-script-region-variant).
      *
+     * When both script and region are present, also tries language-region (dropping script)
+     * after language-script. This matches common CDN layouts (e.g. en-Latn-US → en-US).
+     *
      * Examples:
-     * - "zh-Hans-CN" → ["zh-Hans-CN", "zh-Hans", "zh"]
+     * - "zh-Hans-CN" → ["zh-Hans-CN", "zh-Hans", "zh-CN", "zh"]
+     * - "en-Latn-US" → ["en-Latn-US", "en-Latn", "en-US", "en"]
      * - "en-US" → ["en-US", "en"]
      * - "sr-Cyrl" → ["sr-Cyrl", "sr"]
      * - "en" → ["en"]
@@ -173,24 +181,56 @@ open class Tolgee(
      * @return List of locales in fallback order (most specific to least specific)
      */
     private fun generateLocaleFallbacks(locale: Locale): List<Locale> {
-        val localeTag = locale.toTag("-")
-        val components = localeTag.split("-")
-
         val fallbacks = mutableListOf<Locale>()
+        val seenTags = mutableSetOf<String>()
 
-        // Start with the full locale
-        fallbacks.add(locale)
-
-        // Generate intermediate variations by removing components from right to left
-        for (i in components.size - 1 downTo 2) {
-            val fallbackTag = components.subList(0, i).joinToString("-")
-            fallbacks.add(forLocaleTag(fallbackTag))
+        fun addCandidate(candidate: Locale) {
+            val tagKey = candidate.toTag("-").lowercase()
+            if (seenTags.add(tagKey)) {
+                fallbacks.add(candidate)
+            }
         }
 
-        // Add base language if not already included (when components.size > 1)
-        if (components.size > 1) {
-            fallbacks.add(forLocaleTag(components[0]))
+        addCandidate(locale)
+
+        // Extensions (u, t, x) are atomic in BCP 47 and must not be truncated piecemeal.
+        val coreLocale = locale.removeExtensions()
+        if (coreLocale != locale) {
+            addCandidate(coreLocale)
         }
+
+        val language = coreLocale.language
+        if (language.isBlank()) return fallbacks
+
+        val script = coreLocale.script.takeIf { it.isNotBlank() }
+        val region = coreLocale.country.takeIf { it.isNotBlank() }
+        val variant = coreLocale.variant.takeIf { it.isNotBlank() }
+
+        val subtags = buildList {
+            add(language)
+            script?.let(::add)
+            region?.let(::add)
+            variant?.let(::add)
+        }
+
+        val coreFallbackTags = buildList {
+            for (count in subtags.size - 1 downTo 1) {
+                add(subtags.take(count).joinToString("-"))
+            }
+        }.toMutableList()
+
+        // When both script and region are present, also try language-region (e.g. en-Latn-US → en-US).
+        // Insert after language-script so script-specific matches (zh-Hans) stay preferred over regional ones (zh-CN).
+        if (script != null && region != null) {
+            val langScriptTag = "$language-$script"
+            val langRegionTag = "$language-$region"
+            val scriptIndex = coreFallbackTags.indexOf(langScriptTag)
+            if (scriptIndex >= 0 && langRegionTag !in coreFallbackTags) {
+                coreFallbackTags.add(scriptIndex + 1, langRegionTag)
+            }
+        }
+
+        coreFallbackTags.forEach { addCandidate(forLocaleTag(it)) }
 
         return fallbacks
     }
@@ -210,8 +250,8 @@ open class Tolgee(
      * a match is found.
      *
      * Examples:
-     * - "zh-Hans-CN" → "zh-Hans-CN" → "zh-Hans" → "zh" → default
-     * - "en-Latn-US" → "en-Latn-US" → "en-Latn" → "en" → default
+     * - "zh-Hans-CN" → "zh-Hans-CN" → "zh-Hans" → "zh-CN" → "zh" → default
+     * - "en-Latn-US" → "en-Latn-US" → "en-Latn" → "en-US" → "en" → default
      * - "sr-Cyrl" → "sr-Cyrl" → "sr" → default
      * - "en-US" → "en-US" → "en" → default
      *
