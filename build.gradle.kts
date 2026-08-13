@@ -45,6 +45,13 @@ allprojects {
     }
 }
 
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    compilerOptions {
+        apiVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_1)
+        languageVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_1)
+    }
+}
+
 tasks.withType<DependencyUpdatesTask> {
     outputFormatter {
         val updatable = this.outdated.dependencies
@@ -109,13 +116,16 @@ tasks.withType<DependencyUpdatesTask> {
             if (outputFile.exists()) {
                 outputFile.delete()
             }
-        } catch (ignored: Throwable) { }
+        } catch (ignored: Throwable) {
+        }
         try {
             outputFile.parentFile?.mkdirs()
-        } catch (ignored: Throwable) { }
+        } catch (ignored: Throwable) {
+        }
         try {
             outputFile.writeText(markdown)
-        } catch (ignored: Throwable) { }
+        } catch (ignored: Throwable) {
+        }
     }
     rejectVersionIf {
         isNonStable(candidate.version) && !isNonStable(currentVersion)
