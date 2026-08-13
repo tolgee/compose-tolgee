@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>TolgeeApple</title>
-<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,19 +24,17 @@
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
                     tolgee-mobile-kotlin-sdk
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
@@ -44,13 +42,13 @@
         <div class="library-version" id="library-version">
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":core/appleMain">apple</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":core/appleMain">apple</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,47 +62,49 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
             <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     tolgee-mobile-kotlin-sdk
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="Core::io.tolgee/TolgeeApple///PointingToDeclaration//-249949908">
   <div class="breadcrumbs"><a href="../../index.html">Core</a><span class="delimiter">/</span><a href="../index.html">io.tolgee</a><span class="delimiter">/</span><span class="current">TolgeeApple</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Tolgee</span><wbr><span><span>Apple</span></span></h1>
     <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
       <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain" data-active="" data-toggle=":core/appleMain">apple</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">TolgeeApple</a> : <a href="../../../core/io.tolgee/-tolgee/index.html">Tolgee</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/tolgee/tolgee-mobile-kotlin-sdk/tree/master/core/src/appleMain/kotlin/io/tolgee/TolgeeApple.kt#L26">source</a>)</span></span></div><p class="paragraph">A data class representing the implementation of the Tolgee localization framework for Apple platforms. This class extends the base Tolgee class and provides methods for accessing translated strings, either as flows or as immediate values.</p></div>    </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">TolgeeApple</a> : <a href="../../../core/io.tolgee/-tolgee/index.html">Tolgee</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/tolgee/tolgee-mobile-kotlin-sdk/tree/master/core/src/appleMain/kotlin/io/tolgee/TolgeeApple.kt#L26">source</a>)</span></span></div><p class="paragraph">A data class representing the implementation of the Tolgee localization framework for Apple platforms. This class extends the base Tolgee class and provides methods for accessing translated strings, either as flows or as immediate values.</p></div>    </div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="TYPE">
-        <h2 class="">Types</h2>
+        <h2 class="tableheader">Types</h2>
         <div class="table"><a data-name="1108268672%2FClasslikes%2F-249949908" anchor-label="Companion" id="1108268672%2FClasslikes%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
@@ -123,9 +123,9 @@
         </div>
       </div>
       <div data-togglable="PROPERTY">
-        <h2 class="">Properties</h2>
+        <h2 class="tableheader">Properties</h2>
         <div class="table"><a data-name="-612717339%2FProperties%2F-249949908" anchor-label="availableLocales" id="-612717339%2FProperties%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-612717339%2FProperties%2F-249949908"><span>available</span><wbr><span><span>Locales</span></span></a></div>
@@ -136,13 +136,13 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain" data-active="" data-toggle=":core/appleMain">apple</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#-612717339%2FProperties%2F-249949908">availableLocales</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span data-unresolved-link="de.comahe.i18n4k/Locale///PointingToDeclaration/">Locale</span><span class="token operator">&gt;</span><span class="token operator">?</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#-612717339%2FProperties%2F-249949908">availableLocales</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span data-unresolved-link="de.comahe.i18n4k/Locale///PointingToDeclaration/">Locale</span><span class="token operator">&gt;</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The list of available locales from the manifest or configuration.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="-2008851063%2FProperties%2F-249949908" anchor-label="availableLocaleTags" id="-2008851063%2FProperties%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-2008851063%2FProperties%2F-249949908"><span>available</span><wbr><span>Locale</span><wbr><span><span>Tags</span></span></a></div>
@@ -153,13 +153,13 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain" data-active="" data-toggle=":core/appleMain">apple</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#-2008851063%2FProperties%2F-249949908">availableLocaleTags</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#-2008851063%2FProperties%2F-249949908">availableLocaleTags</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The list of available locale tags (e.g., <code class="lang-kotlin">["en", "fr", "de"]</code>) from the manifest or configuration.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="-2007991305%2FProperties%2F-249949908" anchor-label="changeFlow" id="-2007991305%2FProperties%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-2007991305%2FProperties%2F-249949908"><span>change</span><wbr><span><span>Flow</span></span></a></div>
@@ -170,13 +170,13 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain" data-active="" data-toggle=":core/appleMain">apple</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html#-2007991305%2FProperties%2F-249949908">changeFlow</a><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines.flow/MutableSharedFlow///PointingToDeclaration/">MutableSharedFlow</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">&gt;</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html#-2007991305%2FProperties%2F-249949908">changeFlow</a><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines.flow/MutableSharedFlow///PointingToDeclaration/">MutableSharedFlow</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">A flow that emits whenever translations change.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="1553620671%2FProperties%2F-249949908" anchor-label="config" id="1553620671%2FProperties%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="config.html"><span><span>config</span></span></a></div>
@@ -195,9 +195,9 @@
         </div>
       </div>
       <div data-togglable="FUNCTION">
-        <h2 class="">Functions</h2>
+        <h2 class="tableheader">Functions</h2>
         <div class="table"><a data-name="1654373910%2FFunctions%2F-249949908" anchor-label="addChangeListener" id="1654373910%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#1654373910%2FFunctions%2F-249949908"><span>add</span><wbr><span>Change</span><wbr><span><span>Listener</span></span></a></div>
@@ -208,13 +208,13 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain" data-active="" data-toggle=":core/appleMain">apple</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html#1654373910%2FFunctions%2F-249949908"><span class="token function">addChangeListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><a href="../../../core/io.tolgee/-tolgee/-change-listener/index.html">Tolgee.ChangeListener</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html#1654373910%2FFunctions%2F-249949908"><span class="token function">addChangeListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><a href="../../../core/io.tolgee/-tolgee/-change-listener/index.html">Tolgee.ChangeListener</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Registers a listener to be notified when translations change.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="145239541%2FFunctions%2F-249949908" anchor-label="getLocale" id="145239541%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#145239541%2FFunctions%2F-249949908"><span>get</span><wbr><span><span>Locale</span></span></a></div>
@@ -225,13 +225,13 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain" data-active="" data-toggle=":core/appleMain">apple</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#145239541%2FFunctions%2F-249949908"><span class="token function">getLocale</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="de.comahe.i18n4k/Locale///PointingToDeclaration/">Locale</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#145239541%2FFunctions%2F-249949908"><span class="token function">getLocale</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="de.comahe.i18n4k/Locale///PointingToDeclaration/">Locale</span></div><div class="brief "><p class="paragraph">Gets the current locale for the Tolgee instance.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="-997964452%2FFunctions%2F-249949908" anchor-label="preload" id="-997964452%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-997964452%2FFunctions%2F-249949908"><span><span>preload</span></span></a></div>
@@ -242,13 +242,13 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain" data-active="" data-toggle=":core/appleMain">apple</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="index.html#-997964452%2FFunctions%2F-249949908"><span class="token function">preload</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="index.html#-997964452%2FFunctions%2F-249949908"><span class="token function">preload</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Preloads the required languages and their translations for the current Tolgee instance.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="1410902877%2FFunctions%2F-249949908" anchor-label="preloadAll" id="1410902877%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#1410902877%2FFunctions%2F-249949908"><span>preload</span><wbr><span><span>All</span></span></a></div>
@@ -259,13 +259,13 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain" data-active="" data-toggle=":core/appleMain">apple</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="index.html#1410902877%2FFunctions%2F-249949908"><span class="token function">preloadAll</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="index.html#1410902877%2FFunctions%2F-249949908"><span class="token function">preloadAll</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Preloads all available languages and their translations into memory.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="665579977%2FFunctions%2F-249949908" anchor-label="removeChangeListener" id="665579977%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#665579977%2FFunctions%2F-249949908"><span>remove</span><wbr><span>Change</span><wbr><span><span>Listener</span></span></a></div>
@@ -276,47 +276,47 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain" data-active="" data-toggle=":core/appleMain">apple</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html#665579977%2FFunctions%2F-249949908"><span class="token function">removeChangeListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><a href="../../../core/io.tolgee/-tolgee/-change-listener/index.html">Tolgee.ChangeListener</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html#665579977%2FFunctions%2F-249949908"><span class="token function">removeChangeListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><a href="../../../core/io.tolgee/-tolgee/-change-listener/index.html">Tolgee.ChangeListener</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Unregisters a previously registered change listener.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="571052836%2FFunctions%2F-249949908" anchor-label="setLocale" id="571052836%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+<a data-name="1638904747%2FFunctions%2F-249949908" anchor-label="setLocale" id="1638904747%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-1878169853%2FFunctions%2F-249949908"><span>set</span><wbr><span><span>Locale</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="571052836%2FFunctions%2F-249949908"></span>
+                  <div><a href="index.html#-1596367734%2FFunctions%2F-249949908"><span>set</span><wbr><span><span>Locale</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1638904747%2FFunctions%2F-249949908"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain" data-active="" data-toggle=":core/appleMain">apple</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1878169853%2FFunctions%2F-249949908"><span class="token function">setLocale</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">locale<span class="token operator">: </span><span data-unresolved-link="de.comahe.i18n4k/Locale///PointingToDeclaration/">Locale</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="de.comahe.i18n4k/Locale///PointingToDeclaration/">Locale</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-2032090053%2FFunctions%2F-249949908"><span class="token function">setLocale</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">localeTag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="de.comahe.i18n4k/Locale///PointingToDeclaration/">Locale</span></div><br><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-locale.html"><span class="token function">setLocale</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">nsLocale<span class="token operator">: </span><span data-unresolved-link="platform.Foundation/NSLocale///PointingToDeclaration/">NSLocale</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="de.comahe.i18n4k/DefaultLocaleImpl///PointingToDeclaration/">DefaultLocaleImpl</span></div><div class="brief "><p class="paragraph">Sets the current locale for the Tolgee instance, updating it in the reactive locale flow.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1596367734%2FFunctions%2F-249949908"><span class="token function">setLocale</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">locale<span class="token operator">: </span><span data-unresolved-link="de.comahe.i18n4k/Locale///PointingToDeclaration/">Locale</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="de.comahe.i18n4k/Locale///PointingToDeclaration/">Locale</span></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-locale.html"><span class="token function">setLocale</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">nsLocale<span class="token operator">: </span><span data-unresolved-link="platform.Foundation/NSLocale///PointingToDeclaration/">NSLocale</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="de.comahe.i18n4k/Locale///PointingToDeclaration/">Locale</span></div><div class="brief "><p class="paragraph">Sets the current locale for the Tolgee instance, updating it in the reactive locale flow.</p></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-2032090053%2FFunctions%2F-249949908"><span class="token function">setLocale</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">localeTag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="de.comahe.i18n4k/Locale///PointingToDeclaration/">Locale</span></div><div class="brief "><p class="paragraph">Adjusts the current locale used for translations.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1979313970%2FFunctions%2F-249949908" anchor-label="t" id="1979313970%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+<a data-name="-426812510%2FFunctions%2F-249949908" anchor-label="t" id="-426812510%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#867968756%2FFunctions%2F-249949908"><span><span>t</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1979313970%2FFunctions%2F-249949908"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-426812510%2FFunctions%2F-249949908"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain" data-active="" data-toggle=":core/appleMain">apple</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#867968756%2FFunctions%2F-249949908"><span class="token function">t</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">parameters<span class="token operator">: </span><a href="../../../core/io.tolgee.model/-tolgee-message-params/index.html">TolgeeMessageParams</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><br><div class="symbol monospace"><span class="token keyword">fun </span><a href="t.html"><span class="token function">t</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">table<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Retrieves the translation for a given key immediately. If no translation is found, falls back to the provided default value or bundle localization.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="t.html"><span class="token function">t</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">table<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>args<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Retrieves an immediate translation string for the given key with optional parameters and a fallback.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#867968756%2FFunctions%2F-249949908"><span class="token function">t</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">parameters<span class="token operator">: </span><a href="../../../core/io.tolgee.model/-tolgee-message-params/index.html">TolgeeMessageParams</a><span class="token operator"> = </span>TolgeeMessageParams.None</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Immediate Tolgee translation for a key with parameters.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="t.html"><span class="token function">t</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">table<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Retrieves the translation for a given key immediately. If no translation is found, falls back to the provided default value or bundle localization.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="t.html"><span class="token function">t</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">table<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>args<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Retrieves an immediate translation string for the given key with optional parameters and a fallback.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="1411796596%2FFunctions%2F-249949908" anchor-label="tArray" id="1411796596%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#1411796596%2FFunctions%2F-249949908"><span>t</span><wbr><span><span>Array</span></span></a></div>
@@ -333,7 +333,7 @@
             </div>
           </div>
 <a data-name="-1853388094%2FFunctions%2F-249949908" anchor-label="tArrayFlow" id="-1853388094%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-1853388094%2FFunctions%2F-249949908"><span>t</span><wbr><span>Array</span><wbr><span><span>Flow</span></span></a></div>
@@ -349,19 +349,19 @@
               </div>
             </div>
           </div>
-<a data-name="2106692160%2FFunctions%2F-249949908" anchor-label="tFlow" id="2106692160%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
-          <div class="table-row" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
+<a data-name="2050766512%2FFunctions%2F-249949908" anchor-label="tFlow" id="2050766512%2FFunctions%2F-249949908" data-filterable-set=":core/appleMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-80016190%2FFunctions%2F-249949908"><span>t</span><wbr><span><span>Flow</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2106692160%2FFunctions%2F-249949908"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2050766512%2FFunctions%2F-249949908"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":core/appleMain" data-filterable-set=":core/appleMain" data-active="" data-toggle=":core/appleMain">apple</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-80016190%2FFunctions%2F-249949908"><span class="token function">tFlow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">parameters<span class="token operator">: </span><a href="../../../core/io.tolgee.model/-tolgee-message-params/index.html">TolgeeMessageParams</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines.flow/Flow///PointingToDeclaration/">Flow</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><br><div class="symbol monospace"><span class="token keyword">fun </span><a href="t-flow.html"><span class="token function">tFlow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">table<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines.flow/Flow///PointingToDeclaration/">Flow</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Provides a flow of localized strings based on the given key, default value, and optional table name.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="t-flow.html"><span class="token function">tFlow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">table<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>args<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines.flow/Flow///PointingToDeclaration/">Flow</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Provides a flow of localized string representations for a given key, allowing localization updates based on dynamic arguments and optional table-specific localization contexts.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":core/appleMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-80016190%2FFunctions%2F-249949908"><span class="token function">tFlow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">parameters<span class="token operator">: </span><a href="../../../core/io.tolgee.model/-tolgee-message-params/index.html">TolgeeMessageParams</a><span class="token operator"> = </span>TolgeeMessageParams.None</span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines.flow/Flow///PointingToDeclaration/">Flow</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Updating Tolgee translation for a key with parameters.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="t-flow.html"><span class="token function">tFlow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">table<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines.flow/Flow///PointingToDeclaration/">Flow</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Provides a flow of localized strings based on the given key, default value, and optional table name.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="t-flow.html"><span class="token function">tFlow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">default<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">table<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>args<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines.flow/Flow///PointingToDeclaration/">Flow</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Provides a flow of localized string representations for a given key, allowing localization updates based on dynamic arguments and optional table-specific localization contexts.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -372,17 +372,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2026 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
