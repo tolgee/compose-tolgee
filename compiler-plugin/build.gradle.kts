@@ -21,6 +21,13 @@ dokka {
             remoteUrl("https://github.com/tolgee/tolgee-mobile-kotlin-sdk/tree/master/compiler-plugin/src")
         }
     }
+    // See core/build.gradle.kts — module pages carry their own branding.
+    pluginsConfiguration.html {
+        customAssets.from(rootProject.file("docs/logo-icon.svg"))
+        customStyleSheets.from(rootProject.file("docs/tolgee.css"))
+        homepageLink.set("https://tolgee.io/")
+        footerMessage.set("© 2021-2026 Tolgee s.r.o. All rights reserved")
+    }
 }
 
 dependencies {

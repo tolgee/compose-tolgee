@@ -45,6 +45,29 @@ allprojects {
     }
 }
 
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    compilerOptions {
+        apiVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_1)
+        languageVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_1)
+    }
+}
+
+dokka {
+    moduleName.set("Tolgee Mobile Kotlin SDK")
+    dokkaPublications.html {
+        suppressInheritedMembers.set(true)
+        failOnWarning.set(true)
+    }
+    // Configured here only: the root project governs the aggregated publication.
+    pluginsConfiguration.html {
+        // Must be named logo-icon.svg — Dokka hardcodes that path for the nav logo and the favicon.
+        customAssets.from("docs/logo-icon.svg")
+        customStyleSheets.from("docs/tolgee.css")
+        homepageLink.set("https://tolgee.io/")
+        footerMessage.set("© 2021-2026 Tolgee s.r.o. All rights reserved")
+    }
+}
+
 tasks.withType<DependencyUpdatesTask> {
     outputFormatter {
         val updatable = this.outdated.dependencies

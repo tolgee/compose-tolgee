@@ -1,17 +1,18 @@
 name: Publish Wiki
 on:
   push:
+  workflow_dispatch:
 
 concurrency:
   group: publish-wiki
   cancel-in-progress: true
 
 jobs:
-  publish-wiki:
+  build:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -20,20 +21,41 @@ jobs:
           submodules: 'recursive'
 
       - name: Setup Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Generate Wiki
         run: ./gradlew dokkaGenerate
 
       - name: Upload Wiki
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: ./build/dokka/html
-          branch: gh-pages
-          force: true
+          path: ./build/dokka/html
+
+  deploy:
+    needs: build
+    # Forks publish every commit as a preview; the canonical repo publishes master and releases only.
+    if: >-
+      github.repository != 'tolgee/tolgee-mobile-kotlin-sdk'
+      || github.ref == 'refs/heads/master'
+      || startsWith(github.ref, 'refs/tags/v')
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

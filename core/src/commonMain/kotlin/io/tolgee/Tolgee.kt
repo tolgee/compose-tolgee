@@ -1041,7 +1041,7 @@ open class Tolgee(
                  * @return The Builder instance, enabling method chaining.
                  * @throws IllegalArgumentException if max < 1 (when not null)
                  *
-                 * @sample
+                 * **Example:**
                  * ```kotlin
                  * contentDelivery {
                  *     maxLocalesInMemory(3)  // Cache up to 3 locales

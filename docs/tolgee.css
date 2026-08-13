@@ -1,0 +1,26 @@
+/*
+ * Tolgee brand overrides for the generated Dokka HTML.
+ * Linked after Dokka's own stylesheets, so these :root blocks win on source order.
+ */
+
+:root {
+    /* dokka style.css accents — default Kotlin purple #7F52FF */
+    --active-tab-border-color: #EC407A;
+    --active-section-color: #EC407A;
+    --sidemenu-section-active-color: #EC407A;
+    --hover-link-color: #EC407A;
+
+    /* ui-kit.css accents — default JetBrains blue #307fff (buttons, dropdowns, focus) */
+    --color-key-blue: #EC407A;
+    --color-key-blue-50: rgba(236, 64, 122, 0.5);
+}
+
+.theme-dark {
+    /* lighter pink for contrast against the #262628 page background */
+    --active-tab-border-color: #F06695;
+    --active-section-color: #F06695;
+    --sidemenu-section-active-color: #F06695;
+    --hover-link-color: #F06695;
+    --color-key-blue: #F06695;
+    --color-key-blue-50: rgba(240, 102, 149, 0.5);
+}
