@@ -26,7 +26,6 @@ public class MainJavaActivity extends ComponentActivity implements Tolgee.Change
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         tolgee.addChangeListener(this);
 
         setContentView(R.layout.activity_main);

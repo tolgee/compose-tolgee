@@ -3,12 +3,12 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
-    alias(libs.plugins.android.library)
+    id("com.android.library")
     alias(libs.plugins.atomicfu)
-    alias(libs.plugins.multiplatform)
-    alias(libs.plugins.cocoapods)
+    id("org.jetbrains.kotlin.multiplatform")
+    id("org.jetbrains.kotlin.native.cocoapods")
     alias(libs.plugins.dokka)
-    alias(libs.plugins.serialization)
+    id("org.jetbrains.kotlin.plugin.serialization")
     alias(libs.plugins.skie)
     alias(libs.plugins.vanniktech.publish)
     `maven-publish`
@@ -18,6 +18,10 @@ plugins {
 val libGroup = "io.tolgee.mobile-kotlin-sdk"
 val libName = "core"
 val appleFramework = "KMPTolgee"
+
+// The libVersion should be defined, usually in gradle.properties or a parent build.gradle
+// If it's missing, it might cause other issues. Assuming it's available.
+val libVersion = libs.versions.library.get()
 
 group = libGroup
 version = libVersion
@@ -267,7 +271,7 @@ android {
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
